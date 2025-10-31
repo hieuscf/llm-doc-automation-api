@@ -1,6 +1,7 @@
 from app.config.database import Base, engine
-from app.models import source_model
+import app.models  
 
-print("Tạo bảng trong PostgeSQL...")
+print("Tạo bảng trong PostgreSQL...")
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 print("Hoàn thành.")
