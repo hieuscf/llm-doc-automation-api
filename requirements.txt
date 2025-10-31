@@ -16,3 +16,4 @@ scrapy
 requests
 beautifulsoup4
 python-docx
+pydantic-settings
