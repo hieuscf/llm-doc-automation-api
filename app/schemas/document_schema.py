@@ -1,5 +1,5 @@
 from pydantic import BaseModel, UUID4, HttpUrl
-from typing import Optional, Any
+from typing import Optional, Any , Dict
 from datetime import datetime
 
 
@@ -18,18 +18,30 @@ class DocumentBase(BaseModel):
 
 
 # --- Create ---
-class DocumentCreate(DocumentBase):
-    source_id: UUID4
-
-
-# --- Update ---
-class DocumentUpdate(BaseModel):
+class DocumentCreate(BaseModel):
+    source_id: UUID
+    url: str
+    local_path: Optional[str] = None
+    file_type: Optional[str] = None
+    document_type: Optional[str] = "khac"
+    document_subtype: Optional[str] = None
     title: Optional[str] = None
     content: Optional[str] = None
-    document_type: Optional[str] = None
-    document_subtype: Optional[str] = None
-    analysis: Optional[Any] = None
-    analyzed_at: Optional[datetime] = None
+    text_excerpt: Optional[str] = None
+    size: Optional[int] = None
+    analysis: Optional[Dict] = None
+
+class DocumentUpdate(BaseModel):
+    url: Optional[str]
+    local_path: Optional[str]
+    file_type: Optional[str]
+    document_type: Optional[str]
+    document_subtype: Optional[str]
+    title: Optional[str]
+    content: Optional[str]
+    text_excerpt: Optional[str]
+    size: Optional[int]
+    analysis: Optional[Dict]
 
 
 # --- Response ---

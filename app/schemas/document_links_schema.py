@@ -14,12 +14,18 @@ class DocumentLinkBase(BaseModel):
 # --- Create ---
 class DocumentLinkCreate(DocumentLinkBase):
     source_id: UUID4
+    url: str
+    file_type: Optional[str] = None
+    level: Optional[int] = 1
 
 
 # --- Update ---
 class DocumentLinkUpdate(BaseModel):
-    status: Optional[str] = None
-    retries: Optional[int] = None
+    url: Optional[str]
+    file_type: Optional[str]
+    level: Optional[int]
+    status: Optional[str]
+    retries: Optional[int]
 
 
 # --- Response ---
@@ -30,3 +36,6 @@ class DocumentLinkResponse(DocumentLinkBase):
 
     class Config:
         from_attributes = True  
+
+
+

@@ -3,23 +3,10 @@ from sqlalchemy.orm import Session
 from uuid import UUID
 from app.config.database import get_db
 from app.controller.document_links_controller import DocumentLinkController
-from pydantic import BaseModel
-from typing import Optional
+from app.schemas.document_links_schema import DocumentLinkCreate , DocumentLinkUpdate
 
 router = APIRouter(prefix="/document-links", tags=["DocumentLinks"])
 
-class DocumentLinkCreate(BaseModel):
-    source_id: UUID
-    url: str
-    file_type: Optional[str] = None
-    level: Optional[int] = 1
-
-class DocumentLinkUpdate(BaseModel):
-    url: Optional[str]
-    file_type: Optional[str]
-    level: Optional[int]
-    status: Optional[str]
-    retries: Optional[int]
 
 def get_controller(db: Session = Depends(get_db)):
     return DocumentLinkController(db)
